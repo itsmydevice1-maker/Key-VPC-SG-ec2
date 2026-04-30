@@ -2,7 +2,7 @@
 
 resource "aws_key_pair" "login_key" {
   key_name   = "ec2-keypair"
-  public_key = file("ec2-keypair.pub")
+  public_key = file("new-key.pub")
 }
 
 # VPC & security group
@@ -75,7 +75,14 @@ resource "aws_instance" "new-machine" {
     delete_on_termination = true # Delete volume on instance termination
 
     tags = {
-      name = each.key
+      Name = each.key
     }
   }
+}
+
+
+resource "aws_instance" "import-instance" {
+  ami = "unknown"
+  instance_type = "unknown"
+  
 }
